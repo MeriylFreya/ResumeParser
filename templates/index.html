@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Resume Parser</title>
+   
+</head>
+<body>
+    <div class="relative isolate overflow-hidden bg-white">
+        <svg class="absolute inset-0 -z-10 h-full w-full stroke-gray-300 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+            aria-hidden="true">
+            <defs>
+                <pattern id="983e3e4c-de6d-4c3f-8d64-b9761d1534cc" width="200" height="200" x="50%" y="-1"
+                    patternUnits="userSpaceOnUse">
+                    <path d="M.5 200V.5H200" fill="none" />
+                </pattern>
+            </defs>
+            <svg x="50%" y="-1" class="overflow-visible fill-gray-800/20">
+                <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
+                    stroke-width="0" />
+            </svg>
+            <rect width="100%" height="100%" stroke-width="0" fill="url(#983e3e4c-de6d-4c3f-8d64-b9761d1534cc)" />
+        </svg>
+        <div class="absolute left-[calc(50%-4rem)] top-10 -z-10 transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]"
+            aria-hidden="true">
+            <div class="aspect-[1108/632] w-[69.25rem] bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-20"
+                style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)">
+            </div>
+        </div>
+        <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
+                <div class="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
+                <div class="mt-2 sm:mt-4 lg:mt-2">
+                    <a href="#" class="inline-flex space-x-6">
+                        <span
+                            class="rounded-full bg-blue-200 px-3 py-1 text-sm font-semibold leading-6 text-blue-700 ring-1 ring-inset ring-blue-300">Resume Parsing Tool</span>
+                                <path fill-rule="evenodd"
+                                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+                <h1 class="mt-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Transform Your Hiring Process with Our Cutting-Edge Resume Parser</h1>
+                <p class="mt-4 text-lg leading-8 text-gray-700">Experience faster, smarter recruitment by extracting key candidate information effortlessly using our state-of-the-art parsing technology.</p>
+                <div class="mt-10 flex items-center gap-x-6">
+                <form action="/process" method="post" enctype="multipart/form-data">
+                    <div class="mt-10 flex flex-col justify-start items-center sm:flex-row sm:items-center gap-x-6">
+                        <input type="file" name="pdf_doc" id="pdf_doc" accept=".pdf" class="drop-shadow-md bg-white font-semibold leading-6 text-gray-900 border border-blue-500 py-2 px-4 rounded-2xl block w-full text-sm text-slate-500
+                                                        file:mr-4 file:py-2 file:px-4
+                                                        file:rounded-full file:border-0
+                                                        file:text-sm file:font-semibold
+                                                        file:bg-blue-100 file:text-blue-600
+                                                        hover:file:bg-blue-200" type="file">
+                        <button type="submit"
+                            class="my-2 bg-blue-600 px-8 rounded-2xl py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Process</button>
+                    </div>
+                </form>
+                </div>
+
+                {% if parsed_data %}
+                <div class="mt-10 max-w-2xl bg-gray-50 p-6 rounded-lg shadow-md" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-900">Parsed Resume Details</h2>
+                    <div class="mb-4">
+                        <h3 class="font-semibold text-gray-800">Emails:</h3>
+                        <ul class="list-disc list-inside">
+                            {% for email in parsed_data.contact_info.emails %}
+                            <li>{{ email }}</li>
+                            {% else %}
+                            <li>No emails found</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="font-semibold text-gray-800">Phone Numbers:</h3>
+                        <ul class="list-disc list-inside">
+                            {% for phone in parsed_data.contact_info.phones %}
+                            <li>{{ phone }}</li>
+                            {% else %}
+                            <li>No phone numbers found</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">Text Sample:</h3>
+                        <pre class="whitespace-pre-wrap bg-white p-4 rounded border border-gray-300 max-h-48 overflow-auto">{{ parsed_data.extracted_text_sample }}</pre>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+             <div class="mx-auto mt-4 flex max-w-2xl sm:mt-6 lg:ml-10 lg:mr-0 lg:mt-10 lg:max-w-none lg:flex-none xl:ml-32">
+                 <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+                     <div class="relative inline-block w-[30rem] h-[30rem]">
+                         <img src="/static/pic.png"
+                             alt="App screenshot" width="2432" height="1442"
+                             class="w-full rounded-lg shadow-lg ring-1 ring-gray-300 hover:scale-105 transition-transform duration-300 ease-in-out relative z-10">
+                        <!-- Animated shapes -->
+                        <span class="absolute top-0 left-0 w-6 h-6 bg-blue-400 rounded-full animate-bounce"></span>
+                        <span class="absolute top-10 right-5 w-4 h-4 bg-purple-500 rounded-full animate-pulse"></span>
+                        <span class="absolute bottom-5 left-10 w-5 h-5 bg-pink-400 rounded-full animate-bounce delay-200"></span>
+                        <span class="absolute bottom-0 right-0 w-7 h-7 bg-green-400 rounded-full animate-pulse delay-300"></span>
+                        <span class="absolute top-5 left-20 w-3 h-3 bg-yellow-400 rounded-full animate-bounce delay-100"></span>
+                        <span class="absolute top-20 right-20 w-5 h-5 bg-red-400 rounded-full animate-pulse delay-400"></span>
+                        <span class="absolute bottom-10 left-20 w-4 h-4 bg-indigo-400 rounded-full animate-bounce delay-300"></span>
+                        <span class="absolute bottom-10 right-20 w-6 h-6 bg-teal-400 rounded-full animate-pulse delay-500"></span>
+                        <span class="absolute top-16 left-10 w-3 h-3 bg-pink-600 rounded-full animate-bounce delay-600"></span>
+                        <span class="absolute top-24 right-10 w-4 h-4 bg-orange-400 rounded-full animate-pulse delay-700"></span>
+                        <span class="absolute bottom-20 left-5 w-5 h-5 bg-cyan-400 rounded-full animate-bounce delay-800"></span>
+                        <span class="absolute bottom-24 right-5 w-3 h-3 bg-lime-400 rounded-full animate-pulse delay-900"></span>
+                        <span class="absolute top-28 left-16 w-4 h-4 bg-rose-400 rounded-full animate-bounce delay-1000"></span>
+                        <span class="absolute top-32 right-16 w-5 h-5 bg-emerald-400 rounded-full animate-pulse delay-1100"></span>
+                        <span class="absolute bottom-28 left-12 w-6 h-6 bg-fuchsia-400 rounded-full animate-bounce delay-1200"></span>
+                        <span class="absolute top-8 left-24 w-4 h-4 bg-yellow-300 rounded-full animate-pulse delay-1300"></span>
+                        <span class="absolute top-14 right-24 w-5 h-5 bg-red-300 rounded-full animate-bounce delay-1400"></span>
+                        <span class="absolute bottom-16 left-24 w-3 h-3 bg-indigo-300 rounded-full animate-pulse delay-1500"></span>
+                     </div>
+                 </div>
+             </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
