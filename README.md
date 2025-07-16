@@ -2,6 +2,7 @@
 
 ## Project Overview
 The Resume Parser is a web application designed to streamline the recruitment process by automatically extracting key candidate information from uploaded resumes. Using advanced parsing technology, the tool extracts contact details such as emails and phone numbers, as well as sample text from resumes, enabling faster and smarter hiring decisions.
+https://resumeparser-3ag5.onrender.com
 
 ## Features
 - Upload PDF or DOCX resumes for parsing.
